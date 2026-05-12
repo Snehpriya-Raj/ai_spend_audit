@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AI Spend Audit</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+<body class="bg-black">
+
+  <!-- NAVBAR -->
+
+   <nav class="bg-zinc-900/90 backdrop-blur-md border-b border-zinc-800 fixed w-full sticky top-0 left-0 z-50 shadow-xl">
+
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <!-- LOGO -->
+    <div class="flex items-center gap-3 cursor-pointer">
+
+      <div class="w-11 h-11 rounded-xl bg-cyan-400 flex items-center justify-center shadow-lg shadow-cyan-500/30">
+        <span class="text-black font-bold text-xl">AI</span>
+      </div>
+
+      <div>
+        <h1 class="text-2xl text-white font-bold tracking-wide">
+          AI Spend Audit
+        </h1>
+
+        <p class="text-xs text-zinc-400">
+          Cost Optimization Platform
+        </p>
+      </div>
+
+    </div>
+
+    <!-- DESKTOP MENU -->
+    <div class="hidden sm:hiiden text-white md:flex items-center gap-10 text-[17px] font-medium">
+
+      <a href="#features"
+        class="relative group hover:text-cyan-400 duration-300">
+
+        Features
+
+        <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-cyan-400 duration-300 group-hover:w-full"></span>
+      </a>
+
+      <a href="#pricing"
+        class="relative group hover:text-cyan-400 duration-300">
+
+        Pricing
+
+        <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-cyan-400 duration-300 group-hover:w-full"></span>
+      </a>
+
+      <a href="#contact"
+        class="relative group hover:text-cyan-400 duration-300">
+
+        Contact
+
+        <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-cyan-400 duration-300 group-hover:w-full"></span>
+      </a>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="hidden md:flex items-center gap-5">
+
+      <!-- STATUS -->
+      <div class="flex items-center gap-2 bg-zinc-800 px-4 py-2 rounded-full border border-zinc-700">
+
+        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+
+        <span class="text-sm text-zinc-300">
+          Live Analytics
+        </span>
+
+      </div>
+
+      <!-- BUTTON -->
+      <button class="bg-cyan-400 text-black px-6 py-3 rounded-xl font-semibold hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/40 duration-300">
+        Start Audit
+      </button>
+
+    </div>
+
+    <!-- MOBILE BUTTON -->
+    <button id="menuBtn"
+      class="md:hidden text-4xl text-cyan-400">
+      ☰
+    </button>
+
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu"
+    class=" text-white  md:hidden bg-zinc-900 border-t border-zinc-800 px-6 py-6 flex flex-col gap-6 text-lg">
+
+    <a href="#features"
+      class="hover:text-cyan-400 duration-300">
+      Features
+    </a>
+
+    <a href="#pricing"
+      class="hover:text-cyan-400 duration-300">
+      Pricing
+    </a>
+
+    <a href="#contact"
+      class="hover:text-cyan-400 duration-300">
+      Contact
+    </a>
+
+    <button class="bg-cyan-400 text-black py-3 rounded-xl font-semibold mt-2">
+      Start Audit
+    </button>
+
+  </div>
+
+</nav>
+<script>
+  
+
+  // NAVBAR TOGGLE
+
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  menuBtn.addEventListener("click", () => {
+
+    mobileMenu.classList.toggle("hidden");
+
+    // ICON CHANGE
+
+    if (mobileMenu.classList.contains("hidden")) {
+      menuBtn.innerHTML = "☰";
+    } 
+    
+    else {
+      menuBtn.innerHTML = "✕";
+    }
+
+  });
+
+</script>
+
+
+
+
+
+
+  <!-- HERO -->
+
+
+  <section
+    class="bg-zinc-950 min-h-screen flex items-center justify-center p-6 pt-32">
+
+    <div class="w-full max-w-5xl grid lg:grid-cols-2 gap-10">
+
+      <!-- LEFT -->
+
+      <div class="flex flex-col justify-center">
+
+        <p class="text-cyan-400 font-semibold mb-4">
+          AI COST OPTIMIZATION
+        </p>
+
+        <h1
+          class="text-5xl lg:text-6xl font-bold text-white leading-tight">
+
+          Stop Overpaying
+          For AI Tools
+
+        </h1>
+
+        <p class="text-zinc-400 mt-6 text-lg leading-relaxed">
+
+          Audit your AI stack instantly.
+          Discover hidden savings opportunities
+          across ChatGPT, Claude, Cursor,
+          Gemini and more.
+
+        </p>
+
+      </div>
+
+      <!-- FORM -->
+
+      <div
+        class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 shadow-2xl">
+
+        <h2 class="text-3xl font-bold text-white mb-8">
+          AI Spend Audit
+        </h2>
+
+        <!-- TOOL -->
+
+        <div class="mb-5">
+
+          <label class="text-zinc-300 block mb-2">
+            AI Tool
+          </label>
+
+          <select id="tool"
+            class="w-full bg-zinc-800 border border-zinc-700 text-white p-4 rounded-xl">
+
+            <option>ChatGPT Team</option>
+            <option>Claude Pro</option>
+            <option>Cursor Pro</option>
+            <option>Gemini Advanced</option>
+            <option>GitHub Copilot</option>
+
+          </select>
+
+        </div>
+
+        <!-- SPEND -->
+
+        <div class="mb-5">
+
+          <label class="text-zinc-300 block mb-2">
+            Monthly Spend ($)
+          </label>
+
+          <input id="spend"
+            type="number"
+            placeholder="Enter monthly spend"
+            class="w-full bg-zinc-800 border border-zinc-700 text-white p-4 rounded-xl" />
+
+        </div>
+
+        <!-- TEAM -->
+
+        <div class="mb-5">
+
+          <label class="text-zinc-300 block mb-2">
+            Team Size
+          </label>
+
+          <input id="team"
+            type="number"
+            placeholder="Enter team size"
+            class="w-full bg-zinc-800 border border-zinc-700 text-white p-4 rounded-xl" />
+
+        </div>
+
+        <!-- USECASE -->
+
+        <div class="mb-6">
+
+          <label class="text-zinc-300 block mb-2">
+            Primary Use Case
+          </label>
+
+          <select id="usecase"
+            class="w-full bg-zinc-800 border border-zinc-700 text-white p-4 rounded-xl">
+
+            <option>Coding</option>
+            <option>Writing</option>
+            <option>Research</option>
+            <option>Data Analysis</option>
+            <option>Mixed</option>
+
+          </select>
+
+        </div>
+
+        <!-- BUTTON -->
+
+        <button onclick="generateAudit()"
+          class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold py-4 rounded-xl hover:scale-[1.02] transition duration-300">
+
+          Generate Audit
+
+        </button>
+
+        <!-- RESULT -->
+
+        <div id="result"
+          class="hidden mt-8 bg-zinc-800 border border-zinc-700 rounded-2xl p-6">
+
+          <h3 class="text-2xl font-bold text-white mb-4">
+            Audit Result
+          </h3>
+
+          <div class="space-y-4">
+
+            <div>
+
+              <p class="text-zinc-400">
+                Current Monthly Spend
+              </p>
+
+              <p id="currentSpend"
+                class="text-3xl font-bold text-white"></p>
+
+            </div>
+
+            <div>
+
+              <p class="text-zinc-400">
+                Recommended Action
+              </p>
+
+              <p id="recommendation"
+                class="text-xl text-cyan-400 font-semibold"></p>
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+
+              <div
+                class="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
+
+                <p class="text-zinc-400 text-sm">
+                  Monthly Savings
+                </p>
+
+                <h4 id="monthlySavings"
+                  class="text-3xl font-bold text-green-400 mt-2"></h4>
+
+              </div>
+
+              <div
+                class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
+
+                <p class="text-zinc-400 text-sm">
+                  Annual Savings
+                </p>
+
+                <h4 id="annualSavings"
+                  class="text-3xl font-bold text-blue-400 mt-2"></h4>
+
+              </div>
+
+            </div>
+
+            <div
+              class="bg-zinc-900 border border-zinc-700 rounded-xl p-4">
+
+              <p class="text-zinc-300 leading-relaxed"
+                id="summary"></p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+ <!-- FEATURES SECTION -->
+<section id="features" class="py-28 px-6 bg-black text-white">
+
+  <div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-16">
+
+      <p class="text-cyan-400 font-semibold tracking-[4px] mb-4">
+        FEATURES
+      </p>
+
+      <h2 class="text-5xl md:text-6xl font-bold">
+        Powerful AI Cost Insights
+      </h2>
+
+      <p class="text-zinc-400 mt-6 text-lg max-w-2xl mx-auto">
+        Discover wasteful spending, compare AI tools, and optimize your company’s AI stack with smart analytics.
+      </p>
+
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <!-- CARD 1 -->
+      <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 hover:-translate-y-2 duration-300 hover:border-cyan-400">
+
+        <div class="w-16 h-16 rounded-2xl bg-cyan-400/20 flex items-center justify-center text-3xl mb-6">
+          📊
+        </div>
+
+        <h3 class="text-3xl font-bold mb-4">
+          Spend Analytics
+        </h3>
+
+        <p class="text-zinc-400 leading-relaxed">
+          Track monthly AI expenses and identify where your company is overspending instantly.
+        </p>
+
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 hover:-translate-y-2 duration-300 hover:border-cyan-400">
+
+        <div class="w-16 h-16 rounded-2xl bg-cyan-400/20 flex items-center justify-center text-3xl mb-6">
+          ⚡
+        </div>
+
+        <h3 class="text-3xl font-bold mb-4">
+          Instant Reports
+        </h3>
+
+        <p class="text-zinc-400 leading-relaxed">
+          Generate complete AI audit reports within minutes using real-time optimization logic.
+        </p>
+
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 hover:-translate-y-2 duration-300 hover:border-cyan-400">
+
+        <div class="w-16 h-16 rounded-2xl bg-cyan-400/20 flex items-center justify-center text-3xl mb-6">
+          🔒
+        </div>
+
+        <h3 class="text-3xl font-bold mb-4">
+          Secure & Private
+        </h3>
+
+        <p class="text-zinc-400 leading-relaxed">
+          Your business data stays protected with enterprise-grade security and encrypted analysis.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+<!-- PRICING SECTION -->
+<section id="pricing" class="py-28 px-6 bg-zinc-950 text-white">
+
+  <div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-16">
+
+      <p class="text-cyan-400 font-semibold tracking-[4px] mb-4">
+        PRICING
+      </p>
+
+      <h2 class="text-5xl md:text-6xl font-bold">
+        Simple Pricing Plans
+      </h2>
+
+      <p class="text-zinc-400 mt-6 text-lg">
+        Choose the perfect plan for your AI optimization journey.
+      </p>
+
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <!-- BASIC -->
+      <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+
+        <h3 class="text-3xl font-bold mb-4">
+          Basic
+        </h3>
+
+        <h1 class="text-5xl font-bold mb-6">
+          $19
+          <span class="text-lg text-zinc-400">/month</span>
+        </h1>
+
+        <ul class="space-y-4 text-zinc-300">
+
+          <li>✔ Basic AI Audit</li>
+          <li>✔ Monthly Reports</li>
+          <li>✔ 1 Team Member</li>
+
+        </ul>
+
+        <button class="w-full mt-8 bg-cyan-400 text-black py-3 rounded-xl font-semibold hover:scale-105 duration-300">
+          Get Started
+        </button>
+
+      </div>
+
+      <!-- PRO -->
+      <div class="bg-cyan-400 text-black rounded-3xl p-8 scale-105 shadow-2xl shadow-cyan-500/30">
+
+        <p class="bg-black text-cyan-400 inline-block px-4 py-1 rounded-full text-sm mb-5">
+          Most Popular
+        </p>
+
+        <h3 class="text-3xl font-bold mb-4">
+          Pro
+        </h3>
+
+        <h1 class="text-5xl font-bold mb-6">
+          $49
+          <span class="text-lg">/month</span>
+        </h1>
+
+        <ul class="space-y-4">
+
+          <li>✔ Advanced Analytics</li>
+          <li>✔ Unlimited Reports</li>
+          <li>✔ Team Collaboration</li>
+
+        </ul>
+
+        <button class="w-full mt-8 bg-black text-white py-3 rounded-xl font-semibold hover:scale-105 duration-300">
+          Start Free Trial
+        </button>
+
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+
+        <h3 class="text-3xl font-bold mb-4">
+          Enterprise
+        </h3>
+
+        <h1 class="text-5xl font-bold mb-6">
+          Custom
+        </h1>
+
+        <ul class="space-y-4 text-zinc-300">
+
+          <li>✔ Dedicated Support</li>
+          <li>✔ Enterprise Security</li>
+          <li>✔ Custom Integrations</li>
+
+        </ul>
+
+        <button class="w-full mt-8 bg-cyan-400 text-black py-3 rounded-xl font-semibold hover:scale-105 duration-300">
+          Contact Sales
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="py-28 px-6 bg-black text-white">
+
+  <div class="max-w-5xl mx-auto">
+
+    <div class="text-center mb-16">
+
+      <p class="text-cyan-400 font-semibold tracking-[4px] mb-4">
+        CONTACT
+      </p>
+
+      <h2 class="text-5xl md:text-6xl font-bold">
+        Let’s Talk
+      </h2>
+
+      <p class="text-zinc-400 mt-6 text-lg">
+        Have questions? Reach out to our team and start optimizing your AI costs today.
+      </p>
+
+    </div>
+
+    <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-10">
+
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <input type="text"
+          placeholder="Your Name"
+          class="bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none focus:border-cyan-400">
+
+        <input type="email"
+          placeholder="Your Email"
+          class="bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none focus:border-cyan-400">
+
+      </div>
+
+      <textarea
+        rows="6"
+        placeholder="Write your message..."
+        class="w-full mt-8 bg-zinc-800 border border-zinc-700 rounded-2xl p-4 outline-none focus:border-cyan-400"></textarea>
+
+      <button class="mt-8 bg-cyan-400 text-black px-10 py-4 rounded-2xl font-bold hover:scale-105 duration-300">
+        Send Message
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+ <footer
+  class="border-t border-zinc-800 bg-zinc-950">
+
+  <div
+    class="max-w-6xl mx-auto px-6 py-10">
+
+    <div
+      class="flex flex-col lg:flex-row justify-between items-center gap-6">
+
+      <!-- LEFT -->
+
+      <div class="text-center lg:text-left">
+
+        <h2
+          class="text-2xl font-bold text-white">
+
+          AI Spend Audit
+
+        </h2>
+
+        <p
+          class="text-zinc-400 mt-2 max-w-md">
+
+          Discover hidden savings across
+          ChatGPT, Claude, Cursor,
+          Gemini and other AI tools.
+
+        </p>
+
+      </div>
+
+      <!-- CENTER -->
+
+      <div
+        class="flex gap-6 text-zinc-400">
+
+        <a
+          href="#features"
+          class="hover:text-cyan-400 transition">
+
+          Features
+
+        </a>
+
+        <a
+          href="#pricing"
+          class="hover:text-cyan-400 transition">
+
+          Pricing
+
+        </a>
+
+        <a
+          href="#contact"
+          class="hover:text-cyan-400 transition">
+
+          Contact
+
+        </a>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <div
+        class="flex gap-4">
+
+        <a
+          href="#"
+          class="bg-zinc-800 hover:bg-zinc-700 transition px-4 py-2 rounded-xl text-white">
+
+          Twitter
+
+        </a>
+
+        <a
+          href="#"
+          class="bg-zinc-800 hover:bg-zinc-700 transition px-4 py-2 rounded-xl text-white">
+
+          GitHub
+
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+
+    <div
+      class="border-t border-zinc-800 mt-8 pt-6 text-center text-zinc-500 text-sm">
+
+      © 2026 AI Spend Audit.
+      Built for Credex Web Development Assignment.
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+  <!-- JS -->
+
+  <script>
+
+
+    // SUPABASE
+
+    const supabaseUrl =
+      "https://pscgamyafwjtpoycnqbp.supabase.co";
+
+    const supabaseKey =
+      "sb_publishable_EPuYHqSLIzG7JwxhN9Hjcg_l2-cjwgs";
+
+    const supabaseClient =
+      supabase.createClient(
+        supabaseUrl,
+        supabaseKey
+      );
+
+
+    // SAVE DATA
+
+    async function saveAuditData(tool, spend, team, usecase) {
+
+      const { data, error } =
+        await supabaseClient
+          .from("audits")
+          .insert([
+            {
+              tool: tool,
+              spend: spend,
+              team_size: team,
+              use_case: usecase
+            }
+          ]);
+
+      if (error) {
+
+        console.log(error);
+
+        alert("Error Saving Data");
+
+      }
+
+      else {
+
+        console.log("Saved");
+
+      }
+
+    }
+
+
+    // AUDIT
+
+    function generateAudit() {
+
+      let tool =
+        document.getElementById("tool").value;
+
+      let spend =
+        Number(
+          document.getElementById("spend").value
+        );
+
+      let team =
+        Number(
+          document.getElementById("team").value
+        );
+
+      let usecase =
+        document.getElementById("usecase").value;
+
+      let monthlySavings = 0;
+
+      let recommendation = "";
+
+      if (tool === "ChatGPT Team" && team <= 2) {
+
+        monthlySavings = spend * 0.40;
+
+        recommendation =
+          "Switch to ChatGPT Plus Plan";
+
+      }
+
+      else if (tool === "Claude Pro") {
+
+        monthlySavings = spend * 0.25;
+
+        recommendation =
+          "Reduce unused Claude seats";
+
+      }
+
+      else if (tool === "Cursor Pro") {
+
+        monthlySavings = spend * 0.20;
+
+        recommendation =
+          "Optimize Cursor licenses";
+
+      }
+
+      else {
+
+        monthlySavings = spend * 0.15;
+
+        recommendation =
+          "Review current subscription usage";
+
+      }
+
+      let annualSavings =
+        monthlySavings * 12;
+
+
+      document
+        .getElementById("result")
+        .classList.remove("hidden");
+
+
+      document
+        .getElementById("currentSpend")
+        .innerHTML =
+        "$" + spend;
+
+
+      document
+        .getElementById("recommendation")
+        .innerHTML =
+        recommendation;
+
+
+      document
+        .getElementById("monthlySavings")
+        .innerHTML =
+        "$" + monthlySavings.toFixed(0);
+
+
+      document
+        .getElementById("annualSavings")
+        .innerHTML =
+        "$" + annualSavings.toFixed(0);
+
+
+      document
+        .getElementById("summary")
+        .innerHTML =
+
+        `Your ${tool} setup for a ${team}-person team focused on ${usecase}
+         appears to have optimization opportunities.
+         You could potentially save around
+         $${monthlySavings.toFixed(0)}
+         every month by switching plans
+         and reducing unnecessary costs.`;
+
+
+      // SAVE TO DATABASE
+
+      saveAuditData(
+        tool,
+        spend,
+        team,
+        usecase
+      );
+
+    }
+
+  </script>
+
+</body>
+
+</html>
